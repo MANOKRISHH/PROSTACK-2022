@@ -9,6 +9,6 @@ function printEvenOrOdd(num) {
   }
   
   // Example usage:
-  printEvenOrOdd(15);  // Output: "5 is odd"
-  printEvenOrOdd(22); // Output: "10 is even"
+  printEvenOrOdd(56);  // Output: "5 is odd"
+  printEvenOrOdd(55); // Output: "10 is even"
   
