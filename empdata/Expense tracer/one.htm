@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Expense Tracer</title>
+</head>
+<body>
+  <h1>Expense Tracer</h1>
+  <form id="expense-form">
+    <label for="expense-name">Expense Name:</label><br>
+    <input type="text" id="expense-name" name="expense-name"><br>
+    <label for="expense-amount">Expense Amount:</label><br>
+    <input type="number" id="expense-amount" name="expense-amount"><br><br>
+    <button type="submit">Add Expense</button>
+  </form>
+  <table id="expense-table">
+    <tr>
+      <th>Expense Name</th>
+      <th>Expense Amount</th>
+    </tr>
+  </table>
+  <p id="total-expenses"></p>
+  <script>
+    // get form and table elements
+    const form = document.getElementById('expense-form');
+    const table = document.getElementById('expense-table');
+    const totalExpenses = document.getElementById('total-expenses');
+
+    // expense array to store expenses
+    let expenses = [];
+
+    // add expense to array and update table
+    const addExpense = (expenseName, expenseAmount) => {
+      expenses.push({ name: expenseName, amount: expenseAmount });
+      updateTable();
+    };
+
+    // update table with latest expenses
+    const updateTable = () => {
+      // clear existing rows
+      table.innerHTML = '<tr><th>Expense Name</th><th>Expense Amount</th></tr>';
+      // add rows for each expense
+      expenses.forEach(expense => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${expense.name}</td><td>${expense.amount}</td>`;
+        table.appendChild(row);
+      });
+      // update total expenses
+      updateTotalExpenses();
+    };
+
+    // update total expenses
+    const updateTotalExpenses = () => {
+      let total = 0;
+      expenses.forEach(expense => {
+        total += expense.amount;
+      });
+      totalExpenses.innerHTML = `Total Expenses: ${total}`;
+    };
+
+    // form submit event listener
+    form.addEventListener('submit', event => {
+      // prevent default form submission
+      event.preventDefault();
+      // get form values
+      const expenseName = document.getElementById('expense-name').value;
+      const expenseAmount = document.getElementById('expense-amount').value;
+      // add expense
+      addExpense(expenseName, expenseAmount);
+      // reset form
+      form.reset();
+    });
+  </script>
+</body>
+</html>
